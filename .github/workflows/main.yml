@@ -27,9 +27,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build Docker image
-      #   run: docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
-      # - name: Push Docker image
-      #   run: docker push $IMAGE_NAME:$IMAGE_TAG
+      - name: Push Docker image
+        run: docker push $IMAGE_NAME:$IMAGE_TAG
 
