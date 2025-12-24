@@ -15,7 +15,7 @@ resource "kubernetes_config_map_v1" "scrapyd_config" {
 }
 
 # Secret scrapyd-secret
-resource "kubernetes_secret" "scrapyd_secret" {
+resource "kubernetes_secret_v1" "scrapyd_secret" {
   metadata {
     name      = "scrapyd-secret"
     namespace = "scrapyd"
@@ -33,7 +33,7 @@ resource "kubernetes_secret" "scrapyd_secret" {
 }
 
 # ConfigMap scrapyd-cache-selectors
-resource "kubernetes_config_map" "scrapyd_cache_selectors" {
+resource "kubernetes_config_map_v1" "scrapyd_cache_selectors" {
   metadata {
     name      = "scrapyd-cache-selectors"
     namespace = "scrapyd"
@@ -47,7 +47,7 @@ resource "kubernetes_config_map" "scrapyd_cache_selectors" {
 }
 
 # Deployment webdriver
-resource "kubernetes_deployment" "webdriver" {
+resource "kubernetes_deployment_v1" "webdriver" {
   metadata {
     name      = "webdriver"
     namespace = "scrapyd"
@@ -117,7 +117,7 @@ resource "kubernetes_deployment" "webdriver" {
 }
 
 # Service webdriver
-resource "kubernetes_service" "webdriver_svc" {
+resource "kubernetes_service_v1" "webdriver_svc" {
   metadata {
     name      = "webdriver-svc"
     namespace = "scrapyd"
@@ -150,7 +150,7 @@ resource "kubernetes_service" "webdriver_svc" {
 }
 
 # Deployment scrapyd
-resource "kubernetes_deployment" "scrapyd" {
+resource "kubernetes_deployment_v1" "scrapyd" {
   metadata {
     name      = "scrapyd"
     namespace = "scrapyd"
@@ -194,7 +194,7 @@ resource "kubernetes_deployment" "scrapyd" {
             name = "WEB_DRIVER_URL"
             value_from {
               config_map_key_ref {
-                name = kubernetes_config_map.scrapyd_config.metadata[0].name
+                name = kubernetes_config_map_v1.scrapyd_config.metadata[0].name
                 key  = "WEB_DRIVER_URL"
               }
             }
@@ -204,7 +204,7 @@ resource "kubernetes_deployment" "scrapyd" {
             name = "DEEPSEEK_TOKEN"
             value_from {
               secret_key_ref {
-                name = kubernetes_secret.scrapyd_secret.metadata[0].name
+                name = kubernetes_secret_v1.scrapyd_secret.metadata[0].name
                 key  = "DEEPSEEK_TOKEN"
               }
             }
@@ -219,7 +219,7 @@ resource "kubernetes_deployment" "scrapyd" {
         volume {
           name = "cache-selector-volume"
           config_map {
-            name = kubernetes_config_map.scrapyd_cache_selectors.metadata[0].name
+            name = kubernetes_config_map_v1.scrapyd_cache_selectors.metadata[0].name
           }
         }
       }
@@ -228,7 +228,7 @@ resource "kubernetes_deployment" "scrapyd" {
 }
 
 # Service scrapyd
-resource "kubernetes_service" "scrapyd_svc" {
+resource "kubernetes_service_v1" "scrapyd_svc" {
   metadata {
     name      = "scrapyd-svc"
     namespace = "scrapyd"
