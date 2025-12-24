@@ -92,6 +92,6 @@ jobs:
           name: tfplan-${{ github.sha }}
           path: terraform
 
-      - name: Terraform Apply
-        working-directory: terraform
-        run: terraform apply -auto-approve tfplan
+      # - name: Terraform Apply
+      #   working-directory: terraform
+      #   run: terraform apply -auto-approve tfplan
