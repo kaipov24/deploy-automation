@@ -3,7 +3,7 @@ provider "kubernetes" {
 }
 
 # ConfigMap scrapyd-config
-resource "kubernetes_config_map" "scrapyd_config" {
+resource "kubernetes_config_map_v1" "scrapyd_config" {
   metadata {
     name      = "scrapyd-config"
     namespace = "scrapyd"

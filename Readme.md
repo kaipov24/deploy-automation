@@ -22,3 +22,11 @@
 
 - [x] 6. **Пуш Docker образа в GHCR**  
       - `docker push $IMAGE_NAME:$IMAGE_TAG`  
+
+- [x] 7. **Инициализация Terraform**  
+      - `terraform init -input=false`  
+      - Устанавливаются провайдеры и backend
+
+- [x] 8. **Создание плана Terraform**  
+      - `terraform plan -out=tfplan -var="image=$IMAGE_NAME:$IMAGE_TAG"`  
+      - План сохраняется, но не применяется
