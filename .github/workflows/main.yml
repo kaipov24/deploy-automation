@@ -33,6 +33,9 @@ jobs:
       - name: Push Docker image
         run: docker push $IMAGE_NAME:$IMAGE_TAG
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
       - name: Terraform Init
         working-directory: terraform
         run: terraform init -input=false
